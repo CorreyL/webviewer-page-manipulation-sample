@@ -55,7 +55,9 @@ const App = () => {
     const data = await doc.extractPages(pagesToExtract, xfdfString);
     const arr = new Uint8Array(data);
 
-    //optionally save the blob to a file or upload to a server
+    /**
+     * @todo Take this blob and write it as a new file to a server
+     */
     const blob = new Blob([arr], { type: 'application/pdf' });
     const filename = 'split-pages-to-new.pdf';
     wvInstance.loadDocument(blob, { extension: 'pdf', filename });
@@ -82,6 +84,9 @@ const App = () => {
     const xfdfString = await annotManager.exportAnnotations();
     const data = await doc.getFileData({ xfdfString });
     const arr = new Uint8Array(data);
+    /**
+     * @todo Take this blob and replace existing document in server
+     */
     const blob = new Blob([arr], { type: 'application/pdf' });
     const filename = 'split-pages-merged-to-existing-document.pdf';
     wvInstance.loadDocument(blob, { extension: 'pdf', filename });
