@@ -40,6 +40,7 @@ const FileList = (props) => {
           </div>
         ))
       }
+      <button onClick={() => togglePageSplitModal(true)}>Split Pages</button>
     </div>
   );
 };
