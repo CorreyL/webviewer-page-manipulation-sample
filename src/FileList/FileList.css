@@ -3,6 +3,9 @@
 }
 
 #file-list > div {
-  cursor: pointer;
   padding: 1em;
+}
+
+#file-list > .filename {
+  cursor: pointer;
 }
