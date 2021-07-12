@@ -14,9 +14,12 @@ const PageSplit = (props) => {
     totalPageCount,
     extractPagesToNewDocument,
     extractPagesAndMergeToExistingDocument,
+    currentDoc,
+    fileList,
   } = props;
   const [ extractionType, setExtractionType ] = useState(extractionTypes.newDocument);
   const [ pagesToExtract, setPagesToExtract ] = useState(1);
+  const [ docToMergeWith, setDocToMergeWith ] = useState(null);
   const showHideClassName = show
     ? 'block'
     : 'none';
@@ -26,7 +29,7 @@ const PageSplit = (props) => {
     if (extractionType === extractionTypes.newDocument) {
       extractPagesToNewDocument(pages);
     } else if (extractionType === extractionTypes.mergeDocument) {
-      extractPagesAndMergeToExistingDocument(pages);
+      extractPagesAndMergeToExistingDocument(pages, docToMergeWith);
     }
     handleClose();
   };
@@ -48,7 +51,37 @@ const PageSplit = (props) => {
             <input type='radio' value={extractionTypes.mergeDocument} name='extraction-type'/>
             <span>Extract Pages and Merge To Existing Document</span>
           </div>
-          <button type='button' onClick={parsePagesToExtractToNewDocument}>
+          {
+            extractionType === extractionTypes.mergeDocument
+            && (
+              <div
+                onChange={(event) => setDocToMergeWith(event.target.value)}
+              >
+                <hr/>
+                {
+                  fileList
+                    .filter(filename => currentDoc.indexOf(filename))
+                    .map((filename, idx) => (
+                      <div
+                        key={`merge-with-${filename}-${idx}`}
+                      >
+                        <input type='radio' value={filename} name='extraction-type'/>
+                        <span>{`${filename}.pdf`}</span>
+                      </div>
+                    ))
+                }
+                <hr/>
+              </div>
+            )
+          }
+          <button
+            type='button'
+            onClick={parsePagesToExtractToNewDocument}
+            disabled={
+              extractionType === extractionTypes.mergeDocument
+              && !docToMergeWith
+            }
+          >
             Extract Pages
           </button>
           <button type='button' onClick={handleClose}>

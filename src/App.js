@@ -56,7 +56,7 @@ const App = () => {
     setCurrentDoc(filename);
   };
 
-  const extractPagesAndMergeToExistingDocument = async (pagesToExtract) => {
+  const extractPagesAndMergeToExistingDocument = async (pagesToExtract, docToMergeWith) => {
     /**
      * @todo Implemenet extractPagesAndMergeToExistingDocument
      */
@@ -78,6 +78,8 @@ const App = () => {
         totalPageCount={totalPageCount}
         extractPagesToNewDocument={extractPagesToNewDocument}
         extractPagesAndMergeToExistingDocument={extractPagesAndMergeToExistingDocument}
+        currentDoc={currentDoc}
+        fileList={fileList}
       />
       <div className="webviewer" ref={viewer}></div>
     </div>
