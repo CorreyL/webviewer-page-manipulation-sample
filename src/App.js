@@ -57,10 +57,20 @@ const App = () => {
   };
 
   const extractPagesAndMergeToExistingDocument = async (pagesToExtract, docToMergeWith) => {
-    /**
-     * @todo Implemenet extractPagesAndMergeToExistingDocument
-     */
-    console.warn('@todo: Stub function');
+    const { annotManager, CoreControls, docViewer } = wvInstance;
+    const doc = await CoreControls.createDocument(`/files/${docToMergeWith}.pdf`);
+    const originalDoc = docViewer.getDocument();
+
+    const pageIndexToInsert = doc.getPageCount() + 1;
+
+    await doc.insertPages(originalDoc, pagesToExtract, pageIndexToInsert);
+    const xfdfString = await annotManager.exportAnnotations();
+    const data = await doc.getFileData({ xfdfString });
+    const arr = new Uint8Array(data);
+    const blob = new Blob([arr], { type: 'application/pdf' });
+    const filename = 'split-pages-merged-to-existing-document.pdf';
+    wvInstance.loadDocument(blob, { extension: 'pdf', filename });
+    setCurrentDoc(filename);
   };
 
   return (
