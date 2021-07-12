@@ -50,6 +50,13 @@ const App = () => {
     setCurrentDoc(filename);
   };
 
+  const extractPagesAndMergeToExistingDocument = async (pagesToExtract) => {
+    /**
+     * @todo Implemenet extractPagesAndMergeToExistingDocument
+     */
+    console.warn('@todo: Stub function');
+  };
+
   return (
     <div className="App">
       <FileList
@@ -63,6 +70,7 @@ const App = () => {
         show={showPageSplitModal}
         totalPageCount={totalPageCount}
         extractPagesToNewDocument={extractPagesToNewDocument}
+        extractPagesAndMergeToExistingDocument={extractPagesAndMergeToExistingDocument}
       />
       <div className="webviewer" ref={viewer}></div>
     </div>

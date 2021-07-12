@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 
 import './PageSplit.css';
 
+const extractionTypes = {
+  newDocument: 'new-document',
+  mergeDocument: 'mergeDocument',
+};
+
 const PageSplit = (props) => {
   const {
     handleClose,
     show,
     totalPageCount,
     extractPagesToNewDocument,
+    extractPagesAndMergeToExistingDocument,
   } = props;
+  const [ extractionType, setExtractionType ] = useState(extractionTypes.newDocument);
   const [ pagesToExtract, setPagesToExtract ] = useState(1);
   const showHideClassName = show
     ? 'block'
@@ -16,7 +23,11 @@ const PageSplit = (props) => {
 
   const parsePagesToExtractToNewDocument = () => {
     const pages = getPageArrayFromString(totalPageCount, pagesToExtract);
-    extractPagesToNewDocument(pages);
+    if (extractionType === extractionTypes.newDocument) {
+      extractPagesToNewDocument(pages);
+    } else if (extractionType === extractionTypes.mergeDocument) {
+      extractPagesAndMergeToExistingDocument(pages);
+    }
     handleClose();
   };
 
@@ -31,8 +42,14 @@ const PageSplit = (props) => {
           />
         </div>
         <div>
+          <div onChange={(event) => setExtractionType(event.target.value)}>
+            <input type='radio' value={extractionTypes.newDocument} name='extraction-type' defaultChecked/>
+            <span>Extract Pages To New Document</span>
+            <input type='radio' value={extractionTypes.mergeDocument} name='extraction-type'/>
+            <span>Extract Pages and Merge To Existing Document</span>
+          </div>
           <button type='button' onClick={parsePagesToExtractToNewDocument}>
-            Extract Pages To New Document
+            Extract Pages
           </button>
           <button type='button' onClick={handleClose}>
             Close Modal
