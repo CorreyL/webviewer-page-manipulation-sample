@@ -18,7 +18,7 @@ const PageSplit = (props) => {
     fileList,
   } = props;
   const [ extractionType, setExtractionType ] = useState(extractionTypes.newDocument);
-  const [ pagesToExtract, setPagesToExtract ] = useState(1);
+  const [ pagesToExtract, setPagesToExtract ] = useState('1');
   const [ docToMergeWith, setDocToMergeWith ] = useState(null);
   const showHideClassName = show
     ? 'block'
