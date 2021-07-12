@@ -36,7 +36,7 @@ const FileList = (props) => {
       {
         fileList.map((fileName, idx) => (
           <div
-            class='filename'
+            className='filename'
             key={`file_${idx}`}
             onClick={() => handleOnClick(fileName)}
           >
