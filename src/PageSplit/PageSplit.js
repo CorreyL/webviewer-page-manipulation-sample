@@ -1,20 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './PageSplit.css';
 
 const PageSplit = (props) => {
-  const { handleClose, show } = props;
+  const {
+    handleClose,
+    show,
+    totalPageCount,
+    extractPagesToNewDocument,
+  } = props;
+  const [ pagesToExtract, setPagesToExtract ] = useState(1);
   const showHideClassName = show
     ? 'block'
     : 'none';
+
+  const parsePagesToExtractToNewDocument = () => {
+    const pages = getPageArrayFromString(totalPageCount, pagesToExtract);
+    extractPagesToNewDocument(pages);
+    handleClose();
+  };
 
   return (
     <div className={`modal display-${showHideClassName}`}>
       <section className='modal-main'>
         <div>
-          <input type='text'/>
+          <input
+            type='text'
+            value={pagesToExtract}
+            onChange={(event) => setPagesToExtract(event.target.value)}
+          />
         </div>
         <div>
+          <button type='button' onClick={parsePagesToExtractToNewDocument}>
+            Extract Pages To New Document
+          </button>
           <button type='button' onClick={handleClose}>
             Close Modal
           </button>
