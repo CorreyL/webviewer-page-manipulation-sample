@@ -1,0 +1,7 @@
+#file-list {
+  flex-direction: row;
+}
+
+#file-list > div {
+  padding: 1em;
+}
