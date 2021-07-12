@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import WebViewer from '@pdftron/webviewer';
+import FileList from './FileList/FileList';
 import './App.css';
 
 const App = () => {
@@ -36,7 +37,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="header">React sample</div>
+      <FileList/>
       <div className="webviewer" ref={viewer}></div>
     </div>
   );
