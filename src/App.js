@@ -40,6 +40,12 @@ const App = () => {
     });
   }, [ setWvInstance ]);
 
+  /**
+   * Extracts the specified pages to a new PDF document
+   *
+   * @param {Array<Number>} pagesToExtract The page numbers to extract from the
+   * currently opened document
+   */
   const extractPagesToNewDocument = async (pagesToExtract) => {
     const { docViewer, annotManager } = wvInstance;
     const doc = docViewer.getDocument();
@@ -56,6 +62,15 @@ const App = () => {
     setCurrentDoc(filename);
   };
 
+  /**
+   * Merges specified pages of the currently opened document to the chosen
+   * document in docToMergeWith
+   *
+   * @param {Array<Number>} pagesToExtract The page numbers to extract from the
+   * currently opened document
+   * @param {String} docToMergeWith The name of the document (without a file
+   * extension) to merge the selected pages of the currently opened document to
+   */
   const extractPagesAndMergeToExistingDocument = async (pagesToExtract, docToMergeWith) => {
     const { annotManager, CoreControls, docViewer } = wvInstance;
     const doc = await CoreControls.createDocument(`/files/${docToMergeWith}.pdf`);
