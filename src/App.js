@@ -12,6 +12,12 @@ const App = () => {
   const [ currentDoc, setCurrentDoc ] = useState('PDFTRON_about.pdf');
   const [ totalPageCount, setTotalPageCount ] = useState(null);
 
+  const fileList = [
+    'demo',
+    'PDFTRON_about',
+    'quote',
+  ];
+
   const togglePageSplitModal = (toggle) => {
     setShowPageSplitModal(toggle);
   };
@@ -64,6 +70,7 @@ const App = () => {
         wvInstance={wvInstance}
         setCurrentDoc={setCurrentDoc}
         currentDoc={currentDoc}
+        fileList={fileList}
       />
       <PageSplit
         handleClose={() => setShowPageSplitModal(false)}

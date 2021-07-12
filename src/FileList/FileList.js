@@ -8,6 +8,7 @@ const FileList = (props) => {
     togglePageSplitModal,
     setCurrentDoc,
     currentDoc,
+    fileList,
   } = props;
 
   const [ loading, setLoading ] = useState(true);
@@ -19,11 +20,6 @@ const FileList = (props) => {
   }, [ wvInstance ]);
 
   const inputDirectory = '/files/';
-  const fileList = [
-    'demo',
-    'PDFTRON_about',
-    'quote',
-  ];
 
   if (loading) {
     return <div>Loading...</div>
