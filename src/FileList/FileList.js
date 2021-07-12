@@ -3,9 +3,13 @@ import React, { useEffect, useState } from 'react';
 import './FileList.css';
 
 const FileList = (props) => {
-  const { wvInstance, togglePageSplitModal } = props;
+  const {
+    wvInstance,
+    togglePageSplitModal,
+    setCurrentDoc,
+    currentDoc,
+  } = props;
 
-  const [ currentDoc, setCurentDoc ] = useState('PDFTRON_about.pdf');
   const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
@@ -27,7 +31,7 @@ const FileList = (props) => {
 
   const handleOnClick = (fileName) => {
     wvInstance.loadDocument(`${inputDirectory}${fileName}.pdf`);
-    setCurentDoc(`${fileName}.pdf`);
+    setCurrentDoc(`${fileName}.pdf`);
   };
 
   return (
